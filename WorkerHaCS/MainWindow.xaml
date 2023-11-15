@@ -1,0 +1,143 @@
+﻿<Window x:Class="WorkerHaCS.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WorkerHaCS"
+        xmlns:converters="clr-namespace:WorkerHaCS.Converters"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        Title="Работник ЖЭС" Height="550" Width="1000"
+        ResizeMode="NoResize">
+    <Window.Resources>
+        <converters:HouseInformationConverter x:Key="HouseInformationConverter" />
+        <converters:PaymentConverter x:Key="PaymentConverter" />
+        <converters:ServiceConverter x:Key="ServiceConverter" />
+        <converters:StreetConverter x:Key="StreetConverter" />
+        <converters:TenantConverter x:Key="TenantConverter" />
+        <converters:AddressConverter x:Key="AddressConverter" />
+        <converters:DateTimeConverter x:Key="DateTimeConverter" />
+    </Window.Resources>
+
+    <Grid Style="{StaticResource Grid}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TabControl Style="{StaticResource TabControl}">
+            <TabItem Header="ЖЭС" x:Name="DepartmentTabItem" MouseUp="FillTabItem_MouseUp" Style="{StaticResource AdditionalTabItem}">
+                <Grid Style="{StaticResource Grid}">
+                    <TabControl Style="{StaticResource AdditionalTabControl}">
+                        <TabItem Header="Арендатор" x:Name="TenantTabItem" Style="{StaticResource AdditionalTabItem}" MouseUp="FillTabItem_MouseUp" Margin="0, -4, 0 ,0">
+                            <Grid Margin="0" Height="500" Width="870">
+                                <DataGrid Name="TenantDataGrid" Margin="10,10,30,70" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden" />
+                                        <DataGridTextColumn Header="Имя" Binding="{Binding Name}" />
+                                        <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}" />
+                                        <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic}" />
+                                        <DataGridTextColumn Header="Телефон" Binding="{Binding PhoneNumber}" />
+                                        <DataGridTextColumn Header="Лицевой счет" Binding="{Binding BankBook}" />
+                                        <DataGridTemplateColumn Header="Оплаты">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button Click="OpenServicePaymentView_Click">Открыть</Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button x:Name="TenantAddButton" Content="Добавить" Style="{StaticResource Button}" Margin="10,409, 757,0" Click="TenantAddButton_Click"></Button>
+                                <Button x:Name="TenantChangeButton" Content="Изменить" Style="{StaticResource Button}" Margin="10,409, 537,0" Click="TenantChangeButton_Click"></Button>
+                                <Button x:Name="TenantDeleteButton" Content="Удалить" Style="{StaticResource Button}" Margin="10,409, 317,0" Click="TenantDeleteButton_Click"></Button>
+                                
+
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Дома" x:Name="HouseInformationTabItem" Style="{StaticResource AdditionalTabItem}" MouseUp="FillTabItem_MouseUp" Margin="0, -4, 0 ,0">
+                            <Grid Margin="0" Height="500" Width="870">
+                                <DataGrid Name="HouseInformationDataGrid" Margin="10,10,30,70" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden" />
+                                        <DataGridTextColumn Header="Улица" Binding="{Binding StreetId, Converter={StaticResource StreetConverter}, Mode=TwoWay}" />
+                                        <DataGridTextColumn Header="Номер дома" Binding="{Binding HouseNumber}" />
+                                        <DataGridTextColumn Header="Количество квартир" Binding="{Binding NumberOfApartments}" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button x:Name="HouseInformationAddButton" Content="Добавить" Style="{StaticResource Button}" Margin="10,409, 757,0" Click="HouseInformationAddButton_Click"></Button>
+                                <Button x:Name="HouseInformationChangeButton" Content="Изменить" Style="{StaticResource Button}" Margin="10,409, 537,0" Click="HouseInformationChangeButton_Click"></Button>
+                                <Button x:Name="HouseInformationDeleteButton" Content="Удалить" Style="{StaticResource Button}" Margin="10,409, 317,0" Click="HouseInformationDeleteButton_Click"></Button>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Улица" x:Name="StreetTabItem" Style="{StaticResource AdditionalTabItem}" MouseUp="FillTabItem_MouseUp" Margin="0, -4, 0 ,0">
+                            <Grid Margin="0" Height="500" Width="870">
+                                <DataGrid Name="StreetDataGrid" Margin="10,10,30,70" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden" />
+                                        <DataGridTextColumn Header="Название" Binding="{Binding Name}" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button x:Name="StreetAddButton" Content="Добавить" Style="{StaticResource Button}" Margin="10,409, 757,0" Click="StreetAddButton_Click"></Button>
+                                <Button x:Name="StreetChangeButton" Content="Изменить" Style="{StaticResource Button}" Margin="10,409, 537,0" Click="StreetChangeButton_Click"></Button>
+                                <Button x:Name="StreetDeleteButton" Content="Удалить" Style="{StaticResource Button}" Margin="10,409, 317,0" Click="StreetDeleteButton_Click"></Button>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Аренда" x:Name="RentApartmentTabItem" Style="{StaticResource AdditionalTabItem}" MouseUp="FillTabItem_MouseUp" Margin="0, -4, 0 ,0">
+                            <Grid Margin="0" Height="500" Width="870">
+                                <DataGrid Name="RentApartmentDataGrid" Margin="10,10,30,70" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden" />
+                                        <DataGridTextColumn Header="Арендатор" Binding="{Binding TenantId, Converter={StaticResource TenantConverter}, Mode=TwoWay}" />
+                                        <DataGridTextColumn Header="Количество проживающих" Binding="{Binding NumberOfResidents}" />
+                                        <DataGridTextColumn Header="Площадь" Binding="{Binding Square}" />
+                                        <DataGridTextColumn Header="Номер дома" Binding="{Binding HouseInformationId, Converter={StaticResource AddressConverter}, Mode=TwoWay}" />
+                                        <DataGridTextColumn Header="Квартира" Binding="{Binding ApartmentNumber}" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button x:Name="RentApartmentAddButton" Content="Добавить" Style="{StaticResource Button}" Margin="10,409, 757,0" Click="RentApartmentAddButton_Click"></Button>
+                                <Button x:Name="RentApartmentChangeButton" Content="Изменить" Style="{StaticResource Button}" Margin="10,409, 537,0" Click="RentApartmentChangeButton_Click"></Button>
+                                <Button x:Name="RentApartmentDeleteButton" Content="Удалить" Style="{StaticResource Button}" Margin="10,409, 317,0" Click="RentApartmentDeleteButton_Click"></Button>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Услуга" x:Name="ServiceTabItem" Style="{StaticResource AdditionalTabItem}" MouseUp="FillTabItem_MouseUp" Margin="0, -4, 0 ,0">
+                            <Grid Margin="0" Height="500" Width="870">
+                                <DataGrid Name="ServiceDataGrid" Margin="10,10,30,70" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden" />
+                                        <DataGridTextColumn Header="Код" Binding="{Binding Code}" />
+                                        <DataGridTextColumn Header="Услуга" Binding="{Binding Name}" />
+                                        <DataGridTextColumn Header="Ед. измерения" Binding="{Binding Unit}" />
+                                        <DataGridTextColumn Header="Тариф, руб." Binding="{Binding Rate}" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button x:Name="ServiceAddButton" Content="Добавить" Style="{StaticResource Button}" Margin="10,409, 757,0" Click="ServiceAddButton_Click"></Button>
+                                <Button x:Name="ServiceChangeButton" Content="Изменить" Style="{StaticResource Button}" Margin="10,409, 537,0" Click="ServiceChangeButton_Click"></Button>
+                                <Button x:Name="ServiceDeleteButton" Content="Удалить" Style="{StaticResource Button}" Margin="10,409, 317,0" Click="ServiceDeleteButton_Click"></Button>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Оплата услуг" x:Name="PaymentForServiceTabItem" Style="{StaticResource AdditionalTabItem}" MouseUp="FillTabItem_MouseUp" Margin="0, -4, 0 ,0">
+                            <Grid Margin="0" Height="500" Width="870">
+                                <DataGrid Name="PaymentForServiceDataGrid" Margin="10,10,30,70" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Id" Binding="{Binding Id}" Visibility="Hidden" />
+                                        <DataGridTextColumn Header="Арендатор" Binding="{Binding TenantId, Converter={StaticResource TenantConverter}, Mode=TwoWay}" />
+                                        <DataGridTextColumn Header="Услуга" Binding="{Binding ServiceId, Converter={StaticResource ServiceConverter}, Mode=TwoWay}" />
+                                        <DataGridTextColumn Header="Сумма оплаты, руб." Binding="{Binding ActuallySpent}" />
+                                        <DataGridTextColumn Header="Дата оплаты" Binding="{Binding DateOfPayment, Converter={StaticResource DateTimeConverter}, Mode=TwoWay}" />
+                                        <DataGridTextColumn Header="В срок оплата" Binding="{Binding PaymentId, Converter={StaticResource PaymentConverter}, Mode=TwoWay}" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button x:Name="PaymentForServiceAddButton" Content="Добавить" Style="{StaticResource Button}" Margin="10,409, 757,0" Click="PaymentForServiceAddButton_Click"></Button>
+                                <Button x:Name="PaymentForServiceChangeButton" Content="Изменить" Style="{StaticResource Button}" Margin="10,409, 537,0" Click="PaymentForServiceChangeButton_Click"></Button>
+                                <Button x:Name="PaymentForServiceDeleteButton" Content="Удалить" Style="{StaticResource Button}" Margin="10,409, 317,0" Click="PaymentForServiceDeleteButton_Click"></Button>
+                                <Button x:Name="OpenDeptorButton" Content="Долг" Style="{StaticResource Button}" Margin="0,440,-710,30" Click="OpenDeptorButton_Click"/>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

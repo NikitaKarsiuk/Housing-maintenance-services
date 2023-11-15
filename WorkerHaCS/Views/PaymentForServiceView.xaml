@@ -1,0 +1,32 @@
+﻿<Window x:Class="WorkerHaCS.Views.PaymentForServiceView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WorkerHaCS.Views"
+        mc:Ignorable="d"
+        Title="PaymentForServiceView" Height="245" Width="355">
+    <Grid>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
+                <Label>Арендатор</Label>
+                <ComboBox x:Name="TenantComboBox" DisplayMemberPath="BankBook"  Margin="64, 0, -244, 0" Width="199"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
+                <Label>Услуга</Label>
+                <ComboBox x:Name="ServiceComboBox" DisplayMemberPath="Name"  Margin="89, 0, 0, 0" Width="199"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
+                <Label>Сумма оплаты</Label>
+                <TextBox x:Name="ActuallySpentTextBox" Style="{StaticResource TextBox}" Margin="46, 0, 0, 0" Width="199"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0">
+                <Label>Дата оплаты</Label>
+                <DatePicker x:Name="DatePickerTextBox" Focusable="False" Margin="57, 0, 0, 0" Width="199"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0, 10, 0, 0"/>
+
+            <Button x:Name="SaveButton" Style="{StaticResource Button}" Content="Сохранить"  Margin="0,10,0,0" Click="SaveButton_Click" />
+        </StackPanel>
+    </Grid>
+</Window>

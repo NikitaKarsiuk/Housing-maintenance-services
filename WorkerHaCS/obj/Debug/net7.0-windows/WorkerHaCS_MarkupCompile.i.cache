@@ -1,0 +1,20 @@
+﻿WorkerHaCS
+1.0.0.0
+
+winexe
+C#
+.cs
+C:\Users\moffa\Desktop\for git\WorkerHaCS\WorkerHaCS\obj\Debug\net7.0-windows\
+WorkerHaCS
+none
+false
+TRACE;DEBUG;NET;NET7_0;NETCOREAPP
+C:\Users\moffa\Desktop\for git\WorkerHaCS\WorkerHaCS\App.xaml
+15-1766555860
+
+29430100287
+201806907125
+MainWindow.xaml;Styles\AdditionalTabControl.xaml;Styles\Button.xaml;Styles\DataGrid.xaml;Styles\Grid.xaml;Styles\TabControl.xaml;Styles\TextBox.xaml;Views\DebtorView.xaml;Views\HouseInformationView.xaml;Views\PaymentForServiceView.xaml;Views\RentApartmentView.xaml;Views\ServicePaymentView.xaml;Views\ServiceView.xaml;Views\StreetView.xaml;Views\TenantView.xaml;
+
+False
+
